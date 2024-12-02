@@ -1,14 +1,17 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import Logo from '../assets/RMLogo.svg'
+import Image from '../components/Image'
 
 const Header = () => {
   return (
     <div className='lg:h-16 border-b border-black w-full flex justify-around items-center'>
-      <Link to={"/"}>
-        <h1>Ricky's Mind Palace</h1>
+      <Link to={"/"} className='flex justify-center items-center gap-2'>
+        <Image src={Logo} className={"w-11 h-11"} />
+        <h1 className='font-sourGummy text-xl'>Rickipedia</h1>
       </Link>
 
-      <div className='flex justify-center items-center gap-2'>
+      <div className='flex justify-center items-center gap-4'>
         <NavLink to={"/"} className={({isActive})=>`${isActive ? '':''}`}>Characters</NavLink>
         <NavLink to={"/"} className={({isActive})=>`${isActive ? '':''}`}>Locations</NavLink>
         <NavLink to={"/"} className={({isActive})=>`${isActive ? '':''}`}>Episodes</NavLink>

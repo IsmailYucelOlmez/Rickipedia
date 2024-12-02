@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        'sourGummy':['Sour Gummy','sans-serif'],
+        'quicksand':['Quicksand','sans-serif'],
+      }
+    },
   },
   plugins: [],
 }
