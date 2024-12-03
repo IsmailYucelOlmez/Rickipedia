@@ -11,6 +11,9 @@ const CharacterDataTable = () => {
 
   return (
     <div>
+      <div>
+        
+      </div>
       {!charactersLoading ?(
         <div>
           <p>data loaded</p>

@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      width:{
+        '6/10':'60%',
+
+      },
       fontFamily:{
         'sourGummy':['Sour Gummy','sans-serif'],
         'quicksand':['Quicksand','sans-serif'],
