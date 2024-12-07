@@ -1,5 +1,4 @@
 import React from 'react'
-import { ReactSVG } from 'react-svg'
 import HeroBanner from '../assets/RMHeroBanner.svg'
 import Image from '../components/Image'
 
