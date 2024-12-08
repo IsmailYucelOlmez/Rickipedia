@@ -13,8 +13,8 @@ const Header = () => {
 
       <div className='flex justify-center items-center gap-4'>
         <NavLink to={"/characters"} className={({isActive})=>`${isActive ? 'font-semibold':''}`}>Characters</NavLink>
-        <NavLink to={"/locations"} className={({isActive})=>`${isActive ? '':''}`}>Locations</NavLink>
-        <NavLink to={"/episodes"} className={({isActive})=>`${isActive ? '':''}`}>Episodes</NavLink>
+        <NavLink to={"/locations"} className={({isActive})=>`${isActive ? 'font-semibold':''}`}>Locations</NavLink>
+        <NavLink to={"/episodes"} className={({isActive})=>`${isActive ? 'font-semibold':''}`}>Episodes</NavLink>
       </div>
       
     </div>

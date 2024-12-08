@@ -53,6 +53,8 @@ const Pagination = ({dataLength,currentPage,setCurrentPage}) => {
     const selectPage=(page)=>{
 
         setCurrentPage(page);
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
 
