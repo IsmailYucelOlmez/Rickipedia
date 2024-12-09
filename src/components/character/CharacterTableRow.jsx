@@ -23,7 +23,7 @@ const CharacterTableRow = ({character}) => {
               <OpenInNewOutlinedIcon sx={{ fontSize:{ xs:15, sm:15, md:15} }}/>
             )}
           </Link>
-          <div class="grid grid-cols-subgrid gap-4 col-span-3">
+          <div className="grid grid-cols-subgrid gap-4 col-span-3">
           <Link to={character?.location?.url || ''} className="col-start-2  flex justify-center items-center gap-1 px-1 text-sm" >
             
             Location: ' 

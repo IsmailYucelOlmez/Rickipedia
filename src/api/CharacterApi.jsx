@@ -2,11 +2,17 @@ import { useQuery } from "react-query"
 
 const baseUrl="https://rickandmortyapi.com/api"
 
-export const useGetCharacters=(page)=>{
-
+export const useGetCharacters=(filters)=>{
+   
+    const params = new URLSearchParams();
+      params.set("page", filters.page);
+      params.set("status", filters.status.join(",") );
+      params.set("species", filters.species.join(","));
+      params.set("gender", filters.gender.join(","));
+   
     const getCharactersRequest=async()=>{
 
-        const response = await fetch(`${baseUrl}/character/?page=${page}`, { method:"GET" });
+        const response = await fetch(`${baseUrl}/character/?${params.toString()}`, { method:"GET" });
 
         if(!response.ok){
             throw new Error("failed to get characters")
@@ -16,7 +22,7 @@ export const useGetCharacters=(page)=>{
     
     }
 
-    const {data:characters,isLoading,isError}=useQuery(["data",page],getCharactersRequest,);
+    const {data:characters,isLoading,isError}=useQuery(["data",filters],getCharactersRequest,);
 
     return{characters,isLoading,isError}
 }

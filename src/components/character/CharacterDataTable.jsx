@@ -1,24 +1,31 @@
 import React, { useState } from 'react'
-import { useGetCharacters, useGetFiveCharacters } from '../../api/CharacterApi'
+import { useGetCharacters } from '../../api/CharacterApi'
 import Pagination from '../Pagination';
 import SearchandFilterBar from '../SearchandFilterBar';
 import CharacterTableRow from './CharacterTableRow';
 
 const CharacterDataTable = () => {
 
-  const [currentPage,setCurrentPage]=useState(1);
+  const filterTemplate=
+  {
+      page:'1',
+      status:[],
+      species:[],
+      gender:[],
+      name:''
+  };
 
-  const {characters,isLoading:charactersLoading}=useGetCharacters(currentPage);
- 
-  //const {fiveCharacter,isLoading}=useGetFiveCharacters(1);
+  const [filters,setFilters]=useState(filterTemplate)
+
+  const {characters,isLoading:charactersLoading}=useGetCharacters(filters);
 
   return (
         
-      !charactersLoading ?(
+      
 
         <div className='flex flex-col'>
 
-          <SearchandFilterBar placeholder={"Search by Name..."}/>
+          <SearchandFilterBar placeholder={"Search by Name..."} setFilters={setFilters}/>
 
           <div className='flex justify-between items-center px-2 border-b border-black pb-1 mb-2'>
             <div className='w-28'>
@@ -35,23 +42,29 @@ const CharacterDataTable = () => {
             
           </div>
 
-          <div className='flex flex-col gap-4'>
+          {!charactersLoading ?(
+            <div className='flex flex-col gap-4'>
 
-          {characters?.results.map((character,i)=>(
+            {characters?.results.map((character,i)=>(
 
-            <CharacterTableRow key={character.id} character={character}/>
-          ))}
-          </div>
+              <CharacterTableRow key={character.id} character={character}/>
+            ))}
+            </div>
 
-          <Pagination dataLength={characters?.info.count} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+          ):(
+            <div>
+              <p>loading...</p>
+            </div>
+          )}
+
+          {!charactersLoading &&(
+
+            <Pagination dataLength={characters?.info.count} currentPage={filters.page} setFilters={setFilters} /> 
+          )}
 
         </div>
         
-      ):(
-        <div>
-          <p>loading...</p>
-        </div>
-      )
+      
       
   )
 }

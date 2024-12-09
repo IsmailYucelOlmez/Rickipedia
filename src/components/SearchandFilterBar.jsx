@@ -1,14 +1,71 @@
-import React from 'react'
+import React, { useEffect, useId, useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
+import { useLocation } from 'react-router-dom';
+import {statuOptions,genderOptions,speciesOptions, sizeOptions} from '../assets/SelectOptions'
+import Select from 'react-select';
 
-const SearchandFilterBar = ({placeholder}) => {
+const SearchandFilterBar = ({placeholder,setFilters}) => {
 
-  const searchFilter=()=>{
+  const [pageLength,setPageLength]=useState(sizeOptions[0]);
+  const [status,setStatus]=useState();
+  const [species,setSpecies]=useState();
+  const [gender,setGender]=useState();
+  
+  const resetPageValue=()=>{
 
+    setFilters(prev=>({...prev,page:'1'}))
   }
 
+  const changeLength=(selectedItems)=>{
+
+    setPageLength(selectedItems)
+  }
+
+  const changeStatus= (selectedItems)=>{
+
+    setStatus(selectedItems)
+    setFilters(prev=>({...prev,status:[]}))
+
+    selectedItems.map((item)=>{
+
+      setFilters(prev=>({...prev,status:[...prev.status,item.value]}))
+    })
+
+    resetPageValue();
+    
+  }
+
+  const changeSpecies=(selectedItems)=>{
+   
+    setSpecies(selectedItems)
+    setFilters(prev=>({...prev,species:[]}))
+
+    selectedItems.map((item)=>{
+
+      setFilters(prev=>({...prev,species:[...prev.species,item.value]}))
+    })
+
+    resetPageValue();
+  }
+
+  const changeGenders=(selectedItems)=>{
+    
+    setGender(selectedItems)
+    setFilters(prev=>({...prev,gender:[]}))
+
+    selectedItems.map((item)=>{
+
+      setFilters(prev=>({...prev,gender:[...prev.gender,item.value]}))
+    }) 
+
+    resetPageValue();
+  }
+  
+
+  const location=useLocation();
+
   return (
-    <div className='flex justify-between items-center mb-6'>
+    <div className='flex justify-between items-center mb-6 gap-4'>
       <div className='flex justify-center items-center w-1/4 gap-2'>
         <div className='flex justify-center items-center gap-1 w-full '>
           <input type="text" name="" id="searchInput" className='w-full outline-none border border-black rounded-xl px-2 py-1 ' placeholder={placeholder} />
@@ -16,29 +73,53 @@ const SearchandFilterBar = ({placeholder}) => {
         </div>
         <button  className=''>Clear</button>
       </div>
-      <div className='flex gap-4'>
-        <select name="" id="" className='border border-black outline-none rounded-xl px-2 py-1'>
-            <option value="">20 Row</option>
-            <option value="">40 Row</option>              
-        </select>
-        <select name="" id="" className='border border-black outline-none rounded-xl px-2 py-1'>
-            <option value="">All</option>
-            <option value="">Alive</option>
-            <option value="">Dead</option>
-            <option value="">Unknown</option>
-        </select>
-        <select name="" id="" className='border border-black outline-none rounded-xl px-2 py-1'>
-            <option value="">All</option>
-            <option value="">Human</option>
-            <option value="">Alien</option>    
-        </select>
-        <select name="" id="" className='border border-black outline-none rounded-xl px-2 py-1'>
-            <option value="">All</option>
-            <option value="">Male</option>
-            <option value="">Female</option>        
-            <option value="">Genderless</option>
-            <option value="">Unknown</option>   
-        </select>
+      <div className='flex gap-4 flex-1 justify-end items-center'>
+          <Select
+            defaultValue={sizeOptions[0]}         
+            value={pageLength}
+            onChange={changeLength}
+            name="length"
+            options={sizeOptions}
+            className="p-0 text-xs"
+            
+          />  
+        {location.pathname=="/characters" && (
+          <>
+            <Select
+              defaultValue={[]}
+              isMulti
+              value={status}
+              onChange={changeStatus}
+              name="status"
+              options={statuOptions}
+              className="p-0 text-xs"
+              placeholder="Statu"
+              
+            />   
+            <Select
+              defaultValue={[]}
+              isMulti
+              value={species}
+              onChange={changeSpecies}
+              name="species"
+              options={speciesOptions}
+              className="p-0 text-xs"
+              placeholder="Species"
+            />  
+            <Select
+              defaultValue={[]}
+              isMulti
+              value={gender}
+              onChange={changeGenders}
+              name="genders"
+              options={genderOptions}
+              className="p-0 text-xs"
+              placeholder="Gender"
+            />  
+          </>
+          
+        )}
+        
       </div>
     </div>
   )

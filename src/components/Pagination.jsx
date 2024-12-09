@@ -3,11 +3,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 
-const Pagination = ({dataLength,currentPage,setCurrentPage}) => {
+const Pagination = ({dataLength,currentPage,setFilters}) => {
 
-    //const dispatch=useDispatch();
-    //const {currentPage,perPage}=useSelector((state)=>state.datatable)
-    //const [currentPage,setCurrentPage]=useState(1);
     const perPage=20;
     const [paginationPages,setPaginationPages]=useState([]);
 
@@ -52,7 +49,8 @@ const Pagination = ({dataLength,currentPage,setCurrentPage}) => {
 
     const selectPage=(page)=>{
 
-        setCurrentPage(page);
+        //setCurrentPage(page);
+        setFilters(prev=>({...prev,page:page}))
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
