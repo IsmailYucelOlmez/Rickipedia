@@ -20,9 +20,7 @@ const CharacterDataTable = () => {
   const {characters,isLoading:charactersLoading}=useGetCharacters(filters);
 
   return (
-        
       
-
         <div className='flex flex-col'>
 
           <SearchandFilterBar placeholder={"Search by Name..."} setFilters={setFilters}/>
@@ -43,6 +41,7 @@ const CharacterDataTable = () => {
           </div>
 
           {!charactersLoading ?(
+          <>
             <div className='flex flex-col gap-4'>
 
             {characters?.results.map((character,i)=>(
@@ -51,16 +50,17 @@ const CharacterDataTable = () => {
             ))}
             </div>
 
+            <Pagination dataLength={characters?.info.count} currentPage={filters.page} setFilters={setFilters} /> 
+
+          </>
+
           ):(
             <div>
               <p>loading...</p>
             </div>
           )}
 
-          {!charactersLoading &&(
-
-            <Pagination dataLength={characters?.info.count} currentPage={filters.page} setFilters={setFilters} /> 
-          )}
+          
 
         </div>
         

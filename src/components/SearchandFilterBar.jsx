@@ -10,6 +10,9 @@ const SearchandFilterBar = ({placeholder,setFilters}) => {
   const [status,setStatus]=useState();
   const [species,setSpecies]=useState();
   const [gender,setGender]=useState();
+    
+  const location=useLocation();
+
   
   const resetPageValue=()=>{
 
@@ -21,48 +24,37 @@ const SearchandFilterBar = ({placeholder,setFilters}) => {
     setPageLength(selectedItems)
   }
 
-  const changeStatus= (selectedItems)=>{
+  const changeStatus= (selectedItem)=>{
 
-    setStatus(selectedItems)
+    setStatus(selectedItem)
     setFilters(prev=>({...prev,status:[]}))
 
-    selectedItems.map((item)=>{
-
-      setFilters(prev=>({...prev,status:[...prev.status,item.value]}))
-    })
+    setFilters(prev=>({...prev,status:[...prev.status,selectedItem.value]}))
 
     resetPageValue();
     
   }
 
-  const changeSpecies=(selectedItems)=>{
+  const changeSpecies=(selectedItem)=>{
    
-    setSpecies(selectedItems)
-    setFilters(prev=>({...prev,species:[]}))
+    setSpecies(selectedItem)
+    setFilters(prev=>({...prev,species:[]}))   
 
-    selectedItems.map((item)=>{
-
-      setFilters(prev=>({...prev,species:[...prev.species,item.value]}))
-    })
+    setFilters(prev=>({...prev,species:[...prev.species,selectedItem.value]}))
 
     resetPageValue();
   }
 
-  const changeGenders=(selectedItems)=>{
+  const changeGenders=(selectedItem)=>{
     
-    setGender(selectedItems)
+    setGender(selectedItem)
     setFilters(prev=>({...prev,gender:[]}))
 
-    selectedItems.map((item)=>{
-
-      setFilters(prev=>({...prev,gender:[...prev.gender,item.value]}))
-    }) 
+    setFilters(prev=>({...prev,gender:[...prev.gender,selectedItem.value]}))
 
     resetPageValue();
   }
-  
 
-  const location=useLocation();
 
   return (
     <div className='flex justify-between items-center mb-6 gap-4'>
@@ -87,7 +79,7 @@ const SearchandFilterBar = ({placeholder,setFilters}) => {
           <>
             <Select
               defaultValue={[]}
-              isMulti
+              
               value={status}
               onChange={changeStatus}
               name="status"
@@ -98,7 +90,7 @@ const SearchandFilterBar = ({placeholder,setFilters}) => {
             />   
             <Select
               defaultValue={[]}
-              isMulti
+              
               value={species}
               onChange={changeSpecies}
               name="species"
@@ -108,7 +100,7 @@ const SearchandFilterBar = ({placeholder,setFilters}) => {
             />  
             <Select
               defaultValue={[]}
-              isMulti
+              
               value={gender}
               onChange={changeGenders}
               name="genders"

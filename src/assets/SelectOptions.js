@@ -1,6 +1,10 @@
 export const statuOptions=
     [
         {
+            label:'All',
+            value:''
+        },
+        {
             label:'Alive',
             value:'alive',
         },
@@ -17,6 +21,10 @@ export const statuOptions=
 export const speciesOptions=
     [
         {
+            label:'All',
+            value:''
+        },
+        {
             label:'Alien',
             value:'alien',
         },
@@ -28,6 +36,10 @@ export const speciesOptions=
 
 export const genderOptions=
     [
+        {
+            label:'All',
+            value:''
+        },
         {
             label:'Male',
             value:'male',
