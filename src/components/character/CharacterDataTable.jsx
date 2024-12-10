@@ -3,16 +3,18 @@ import { useGetCharacters } from '../../api/CharacterApi'
 import Pagination from '../Pagination';
 import SearchandFilterBar from '../SearchandFilterBar';
 import CharacterTableRow from './CharacterTableRow';
+import Loading from '../Loading'
 
 const CharacterDataTable = () => {
 
   const filterTemplate=
   {
-      page:'1',
+      page:1,
       status:[],
       species:[],
       gender:[],
-      name:''
+      name:'',
+      pageSize:20
   };
 
   const [filters,setFilters]=useState(filterTemplate)
@@ -50,14 +52,12 @@ const CharacterDataTable = () => {
             ))}
             </div>
 
-            <Pagination dataLength={characters?.info.count} currentPage={filters.page} setFilters={setFilters} /> 
+            <Pagination dataLength={characters?.info.count} currentPage={filters.page} pageSize={filters.pageSize} setFilters={setFilters} /> 
 
           </>
 
           ):(
-            <div>
-              <p>loading...</p>
-            </div>
+            <Loading/>
           )}
 
           

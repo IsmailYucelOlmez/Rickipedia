@@ -62,11 +62,11 @@ export const sizeOptions=
     [
         {
             label:'20 Row',
-            value:'20',
+            value:20,
         },
         {
-            label:'40 Row',
-            value:'40'
+            label:'10 Row',
+            value:10
         },
        
     ]

@@ -10,18 +10,41 @@ const SearchandFilterBar = ({placeholder,setFilters}) => {
   const [status,setStatus]=useState();
   const [species,setSpecies]=useState();
   const [gender,setGender]=useState();
+  const [name,setName]=useState();
     
   const location=useLocation();
 
   
   const resetPageValue=()=>{
 
-    setFilters(prev=>({...prev,page:'1'}))
+    setFilters(prev=>({...prev,page:1}))
   }
 
-  const changeLength=(selectedItems)=>{
+  const changeName=()=>{
 
-    setPageLength(selectedItems)
+    setFilters(prev=>({...prev,name:name}))
+  }
+
+  const resetName=()=>{
+
+    setName("");
+    setFilters(prev=>({...prev,name:""}))
+  }
+
+  const handleNameInput=(e)=>{
+
+    if(e.key=="Enter" && name){
+      changeName();
+      e.target.blur()
+    }
+  }
+
+  const changeLength=(selectedItem)=>{
+
+    setPageLength(selectedItem)
+    setFilters(prev=>({...prev,pageSize:selectedItem.value}))
+
+    resetPageValue();
   }
 
   const changeStatus= (selectedItem)=>{
@@ -60,10 +83,10 @@ const SearchandFilterBar = ({placeholder,setFilters}) => {
     <div className='flex justify-between items-center mb-6 gap-4'>
       <div className='flex justify-center items-center w-1/4 gap-2'>
         <div className='flex justify-center items-center gap-1 w-full '>
-          <input type="text" name="" id="searchInput" className='w-full outline-none border border-black rounded-xl px-2 py-1 ' placeholder={placeholder} />
-          <button onClick={()=>searchFilter()} className='flex justify-center items-center'><SearchIcon sx={{ fontSize:{ xs:15, sm:20, md:25} }}/></button>
+          <input value={name} onKeyDown={(e)=>handleNameInput(e)} onChange={(e)=>setName(e.target.value)} type="text" name="" id="searchInput" className='w-full outline-none border border-black rounded-xl px-2 py-1 ' placeholder={placeholder} />
+          <button onClick={()=>changeName()} className='flex justify-center items-center'><SearchIcon sx={{ fontSize:{ xs:15, sm:20, md:25} }}/></button>
         </div>
-        <button  className=''>Clear</button>
+        <button onClick={()=>resetName()} className=''>Clear</button>
       </div>
       <div className='flex gap-4 flex-1 justify-end items-center'>
           <Select
