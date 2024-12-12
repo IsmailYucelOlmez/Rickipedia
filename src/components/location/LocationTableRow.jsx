@@ -4,10 +4,10 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 
 const LocationTableRow = ({location}) => {
   return (
-    <div className='flex justify-between items-center my-2'>
+    <div className='flex justify-between items-center my-8'>
 
       <div className='flex flex-col justify-between gap-4 flex-1 '>
-        <div className='grid grid-cols-3 gap-2 w-full text-center h-24'>
+        <div className='grid grid-cols-3 gap-2 w-full text-center'>
           <p>{location.name}</p>
           <p>{location.type}</p>
           <p>{location.dimension}</p>

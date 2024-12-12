@@ -24,10 +24,10 @@ const EpisodeDataTable = () => {
             
             <div className='grid grid-cols-3  gap-2 w-full text-center'>
               
+              <p>Episode Code</p>   
               <p>Name</p>
               <p>Air Date</p>
-              <p>Episode Code</p>            
-              
+                               
             </div>
             
           </div>

@@ -68,3 +68,22 @@ export const useGetCharacters=(filters)=>{
 
     return{characters,isLoading,isError}
 }
+
+export const useGetCharacterById=(id)=>{
+
+    const getCharacterByIdRequest=async()=>{
+
+        const response =await fetch(`${baseUrl}/character/${id}`,{method:'GET'})
+
+        if(!response.ok){
+
+            throw new Error("Failed to get character")
+        }
+
+        return response.json();
+    }
+
+    const {data:character,isLoading,isError}=useQuery("getCharacter",getCharacterByIdRequest);
+
+    return {character,isLoading,isError}
+}
