@@ -2,25 +2,31 @@ import { useQuery } from "react-query"
 
 const baseUrl="https://rickandmortyapi.com/api"
 
-export const useGetCharacters=(filters)=>{
-   
+const setParams=(filters,params)=>{
+
     let actualPage;
 
     if(filters.pageSize==10){
         if(filters.page%2==1){
-
             actualPage=(filters.page+1)/2;      
         }else{
             actualPage=filters.page/2;
         }
     } 
 
+    params.set("page", filters.pageSize==10 ? actualPage:filters.page);
+    params.set("name", filters.name);
+    params.set("status", filters.status.join(",") );
+    params.set("species", filters.species.join(","));
+    params.set("gender", filters.gender.join(","));
+}
+
+
+export const useGetCharacters=(filters)=>{
+   
     const params = new URLSearchParams();
-      params.set("page", filters.pageSize==10 ? actualPage:filters.page);
-      params.set("name", filters.name);
-      params.set("status", filters.status.join(",") );
-      params.set("species", filters.species.join(","));
-      params.set("gender", filters.gender.join(","));
+      
+    setParams(filters,params)
     
    
     const getCharactersRequest=async()=>{
@@ -38,6 +44,19 @@ export const useGetCharacters=(filters)=>{
             const startIndex = (filters.page % 2 === 1) ? 0 : 10;
             const endIndex = startIndex + 10;
             data.results = data.results.slice(startIndex, endIndex);
+        }
+
+        if(filters.sort.attribute && filters.sort.type!="default"){
+            data.results.sort((a, b) => {
+                const valueA = a[filters.sort.attribute].toUpperCase(); // Dinamik olarak attribute'e erişim
+                const valueB = b[filters.sort.attribute].toUpperCase(); // Dinamik olarak attribute'e erişim
+        
+                if (filters.sort.type === 'asc') {
+                    return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
+                } else if (filters.sort.type === 'desc') {
+                    return valueA > valueB ? -1 : valueA < valueB ? 1 : 0;
+                }
+            });
         }
 
         return data;

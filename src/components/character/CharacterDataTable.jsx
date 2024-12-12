@@ -4,6 +4,7 @@ import Pagination from '../Pagination';
 import SearchandFilterBar from '../SearchandFilterBar';
 import CharacterTableRow from './CharacterTableRow';
 import Loading from '../Loading'
+import CharacterTableHead from './CharacterTableHead';
 
 const CharacterDataTable = () => {
 
@@ -14,12 +15,14 @@ const CharacterDataTable = () => {
       species:[],
       gender:[],
       name:'',
-      pageSize:20
+      pageSize:20,
+      sort:{attribute:'',type:'default'}
   };
 
   const [filters,setFilters]=useState(filterTemplate)
 
   const {characters,isLoading:charactersLoading}=useGetCharacters(filters);
+  
 
   return (
       
@@ -27,20 +30,7 @@ const CharacterDataTable = () => {
 
           <SearchandFilterBar placeholder={"Search by Name..."} setFilters={setFilters}/>
 
-          <div className='flex justify-between items-center px-2 border-b border-black pb-1 mb-2'>
-            <div className='w-28'>
-              <p></p>
-            </div>
-            <div className='grid grid-cols-4  gap-2 w-full text-center'>
-              
-              <p>Name</p>
-              <p>Statu</p>
-              <p>Species</p>
-              <p>Gender</p>
-              
-            </div>
-            
-          </div>
+          <CharacterTableHead filters={filters} setFilters={setFilters} />
 
           {!charactersLoading ?(
           <>
