@@ -6,7 +6,6 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { useGetMultipleCharacters } from '../../api/CharacterApi';
 import CharacterTableRow from '../../components/character/CharacterTableRow';
-import CharacterTableHead from '../../components/character/CharacterTableHead';
 
 
 const EpisodeDetailsPage = () => {

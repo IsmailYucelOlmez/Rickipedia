@@ -1,54 +1,45 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useGetLocations } from '../../api/LocationApi';
 import Pagination from '../Pagination';
 import SearchandFilterBar from '../SearchandFilterBar';
 import LocationTableRow from './LocationTableRow';
+import useFilterStore from '../../store/FilterStore';
+import LocationTableHead from './LocationTableHead';
+import Loading from '../Loading';
 
 
 const LocationDataTable = () => {
 
-  const [currentPage,setCurrentPage]=useState(1);
+  const filters=useFilterStore((state)=>state.filters)
 
-  const {locations,isLoading:locationsLoading}=useGetLocations(currentPage);
+  const {locations,isLoading:locationsLoading}=useGetLocations(filters);
  
 
-  return (
-        
-      !locationsLoading ?(
+  return (         
 
-        <div className='flex flex-col'>
+      <div className='flex flex-col'>
 
-          <SearchandFilterBar placeholder={"Search by Name..."}/>
+        <SearchandFilterBar placeholder={"Search by Name..."}/>
 
-          <div className='flex justify-between items-center px-2 border-b border-black pb-1 mb-2'>
-            
-            <div className='grid grid-cols-3  gap-2 w-full text-center'>
-              
-              <p>Name</p>
-              <p>Type</p>
-              <p>Dimension</p>            
-              
+        <LocationTableHead/>    
+
+        {!locationsLoading ?(
+          <>
+            <div className='flex flex-col gap-4'>
+
+              {locations?.results.map((location,i)=>(
+
+                <LocationTableRow key={location.id} location={location}/>
+              ))}
             </div>
-            
-          </div>
 
-          <div className='flex flex-col gap-4'>
+            <Pagination dataLength={locations?.info.count} />
+          </>
+        ):(
+          <Loading/>
+        )}
 
-          {locations?.results.map((location,i)=>(
-
-            <LocationTableRow key={location.id} location={location}/>
-          ))}
-          </div>
-
-          <Pagination dataLength={locations?.info.count} currentPage={currentPage} setCurrentPage={setCurrentPage} />
-
-        </div>
-        
-      ):(
-        <div>
-          <p>loading...</p>
-        </div>
-      )
+      </div>           
       
   )
 }
