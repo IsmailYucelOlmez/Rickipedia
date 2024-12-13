@@ -22,7 +22,7 @@ const EpisodeDetailsPage = () => {
   console.log(convertedCharacters)
 
   return (
-    <div className='w-3/4 mx-auto my-12'>
+    <div className='w-3/4 mx-auto py-12'>
       {!isLoading ? (
         <div className='flex flex-col gap-10'>
 

@@ -59,7 +59,7 @@ const Pagination = ({dataLength}) => {
     
 
   return (
-    <div className='flex flex-wrap items-center gap-3 mb-5 pt-5 px-5 border-t border-black'>
+    <div className='flex flex-wrap items-center gap-3 mb-5 pt-5 px-5 border-t border-black dark:border-white'>
 
         {currentPage!=1 && (
             
@@ -68,7 +68,7 @@ const Pagination = ({dataLength}) => {
 
         {
             paginationPages.map((page,index)=>{
-                return  <button onClick={()=>selectPage(page)} key={index} className={`w-6 h-6 rounded-full ${currentPage==page ?'bg-[#FD49A0] border-white text-white':'border-black'} border flex justify-center items-center`}>
+                return  <button onClick={()=>selectPage(page)} key={index} className={`w-6 h-6 rounded-full ${currentPage==page ?'bg-[#FD49A0] dark:bg-[#08C952] border-white text-white':'border-black'} border flex justify-center items-center`}>
                             <p className='xs:text-sm lg:text-base'>{page}</p>
                         </button>    
             })

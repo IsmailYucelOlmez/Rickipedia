@@ -19,10 +19,8 @@ const LocationDetailsPage = () => {
   const {characters,isLoading:charactersLoading}=useGetMultipleCharacters(characterIndexes);
   let convertedCharacters= !Array.isArray(characters) ? [characters]:characters
 
-  console.log(convertedCharacters)
-
   return (
-    <div className='w-3/4 mx-auto my-12'>
+    <div className='w-3/4 mx-auto py-12'>
       {!isLoading ? (
         <div className='flex flex-col gap-10'>
 

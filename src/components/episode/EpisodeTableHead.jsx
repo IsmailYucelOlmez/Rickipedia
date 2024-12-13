@@ -10,7 +10,7 @@ const EpisodeTableHead = () => {
   const filters=useFilterStore((state)=>state.filters)
 
   return (
-    <div className='flex justify-between items-center px-2 border-b border-black pb-1 mb-2'>
+    <div className='flex justify-between items-center px-2 border-b border-black dark:border-white pb-1 mb-2'>
             
             <div className='grid grid-cols-3  gap-2 w-full text-center'>
               

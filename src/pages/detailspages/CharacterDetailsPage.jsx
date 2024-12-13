@@ -18,6 +18,9 @@ const CharacterDetailsPage = () => {
 
   const {character,isLoading}=useGetCharacterById(id);
 
+  const locationIndex=character?.location?.url.split("/").at(-1) || 0
+  const originIndex=character?.origin?.url.split("/").at(-1) || 0
+
   const episodeIndexes=character?.episode.map((e,i)=>e.split("/").at(-1)) || []
 
   const {episodes,isLoading:episodesLoading}=useGetMultipleEpisodes(episodeIndexes);
@@ -25,7 +28,7 @@ const CharacterDetailsPage = () => {
   
 
   return (
-    <div className='w-3/4 mx-auto my-12 flex flex-col items-center gap-10'>
+    <div className='w-3/4 mx-auto py-12 flex flex-col items-center gap-10'>
 
       {isLoading ? (
 
@@ -54,7 +57,7 @@ const CharacterDetailsPage = () => {
             </div>
 
             <div className='flex flex-col gap-4'>
-              <Link to={character?.origin?.url || ''}  className="flex items-center gap-2 px-1" >    
+              <Link to={originIndex!=0 ? `/location/${originIndex}` : ''}  className="flex items-center gap-2 px-1" >    
                 <PublicIcon sx={{ fontSize:{ xs:15, sm:20, md:20} }}/>   
                 Origin: '
                 {character?.origin?.name}'
@@ -62,7 +65,7 @@ const CharacterDetailsPage = () => {
                   <OpenInNewOutlinedIcon sx={{ fontSize:{ xs:15, sm:15, md:15} }}/>
                 )}
               </Link>      
-              <Link to={character?.location?.url || ''} className=" flex items-center gap-2 px-1" >       
+              <Link to={locationIndex!=0 ? `/location/${locationIndex}` : ''} className=" flex items-center gap-2 px-1" >       
                 <LocationOnIcon sx={{ fontSize:{ xs:15, sm:20, md:20} }}/>      
                 Location: ' 
                 { character?.location?.name}'

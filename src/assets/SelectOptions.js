@@ -6,7 +6,7 @@ export const statuOptions=
         },
         {
             label:'Alive',
-            value:'alive',
+            value:'alive',            
         },
         {
             label:'Dead',

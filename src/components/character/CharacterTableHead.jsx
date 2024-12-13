@@ -10,7 +10,7 @@ const CharacterTableHead = () => {
   const filters=useFilterStore((state)=>state.filters)
 
   return (
-    <div className='flex justify-between items-center px-2 border-b border-black pb-1 mb-2'>
+    <div className='flex justify-between items-center px-2 border-b border-black dark:border-white pb-1 mb-2'>
             <div className='w-28'>
               <p></p>
             </div>

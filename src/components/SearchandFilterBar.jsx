@@ -63,12 +63,25 @@ const SearchandFilterBar = ({placeholder}) => {
     updateFilters({page:1})
   }
 
+  const colourStyles = {
+    control: styles => ({ ...styles, backgroundColor: 'white' }),
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      const color = chroma(data.color);
+      return {
+        ...styles,
+        backgroundColor: isDisabled ? 'red' : blue,
+        color: '#FFF',
+        cursor: isDisabled ? 'not-allowed' : 'default',      
+      };
+    },  
+  };
+
 
   return (
     <div className='flex justify-between items-center mb-6 gap-4'>
       <div className='flex justify-center items-center w-1/4 gap-2'>
         <div className='flex justify-center items-center gap-1 w-full '>
-          <input value={name} onKeyDown={(e)=>handleNameInput(e)} onChange={(e)=>setName(e.target.value)} type="text" name="" id="searchInput" className='w-full outline-none border border-black rounded-xl px-2 py-1 ' placeholder={placeholder} />
+          <input value={name} onKeyDown={(e)=>handleNameInput(e)} onChange={(e)=>setName(e.target.value)} type="text" name="" id="searchInput" className='w-full outline-none border border-black rounded-xl px-2 py-1 dark:bg-[#293241] dark:border-white' placeholder={placeholder} />
           <button onClick={()=>updateFilters({name:name})} className='flex justify-center items-center'><SearchIcon sx={{ fontSize:{ xs:15, sm:20, md:25} }}/></button>
         </div>
         <button onClick={()=>resetName()} className=''>Clear</button>
@@ -80,40 +93,37 @@ const SearchandFilterBar = ({placeholder}) => {
             onChange={changeLength}
             name="length"
             options={sizeOptions}
-            className="p-0 text-xs"
+            className="p-0 text-xs text-black"
             
           />  
         {location.pathname=="/characters" && (
           <>
             <Select
-              defaultValue={[]}
-              
+              defaultValue={[]}          
               value={status}
               onChange={changeStatus}
               name="status"
               options={statuOptions}
-              className="p-0 text-xs"
+              className="p-0 text-xs text-black"
               placeholder="Statu"
-              
+              styles={colourStyles}          
             />   
             <Select
-              defaultValue={[]}
-              
+              defaultValue={[]}       
               value={species}
               onChange={changeSpecies}
               name="species"
               options={speciesOptions}
-              className="p-0 text-xs"
+              className="p-0 text-xs text-black"
               placeholder="Species"
             />  
             <Select
-              defaultValue={[]}
-              
+              defaultValue={[]}             
               value={gender}
               onChange={changeGenders}
               name="genders"
               options={genderOptions}
-              className="p-0 text-xs"
+              className="p-0 text-xs text-black"
               placeholder="Gender"
             />  
           </>

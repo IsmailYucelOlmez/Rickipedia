@@ -5,6 +5,10 @@ import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 
 const CharacterTableRow = ({character}) => {
+
+  const locationIndex=character?.location?.url.split("/").at(-1) || 0
+  const originIndex=character?.origin?.url.split("/").at(-1) || 0
+
   return (
     <div className='flex justify-between items-center my-2'>
       <Image src={character.image} className={"w-28 h-28 rounded-xl"} />
@@ -15,7 +19,7 @@ const CharacterTableRow = ({character}) => {
           <p>{character.species}</p>
           <p>{character.gender}</p>
         
-          <Link to={character?.origin?.url || ''}  className=" flex justify-center items-center gap-1 px-1 text-sm" >
+          <Link to={originIndex!=0 ? `/location/${originIndex}` : ''}  className=" flex justify-center items-center gap-1 px-1 text-sm" >
             
             Origin: '
             {character?.origin?.name}'
@@ -24,7 +28,7 @@ const CharacterTableRow = ({character}) => {
             )}
           </Link>
           <div className="grid grid-cols-subgrid gap-4 col-span-3">
-          <Link to={character?.location?.url || ''} className="col-start-2  flex justify-center items-center gap-1 px-1 text-sm" >
+          <Link to={locationIndex!=0 ? `/location/${locationIndex}` : ''} className="col-start-2  flex justify-center items-center gap-1 px-1 text-sm" >
             
             Location: ' 
             { character?.location?.name}'
