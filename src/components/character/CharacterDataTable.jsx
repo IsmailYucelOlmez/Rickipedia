@@ -11,8 +11,6 @@ const CharacterDataTable = () => {
 
   const filters=useFilterStore((state)=>state.filters)
 
-  console.log(filters)
-
   const {characters,isLoading:charactersLoading}=useGetCharacters(filters);
 
   return (
@@ -33,7 +31,7 @@ const CharacterDataTable = () => {
             ))}
             </div>
 
-            <Pagination dataLength={characters?.info.count} currentPage={filters.page} pageSize={filters.pageSize} /> 
+            <Pagination dataLength={characters?.info.count} /> 
 
           </>
 

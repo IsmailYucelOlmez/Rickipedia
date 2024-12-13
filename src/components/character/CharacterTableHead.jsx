@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import CircleIcon from '@mui/icons-material/Circle';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import SortByAlphaOutlinedIcon from '@mui/icons-material/SortByAlphaOutlined';
@@ -62,7 +62,8 @@ const CharacterTableHead = () => {
                 )}
                 Species
               </button>
-              <button>Gender</button>
+
+              <button disabled>Gender</button>
               
             </div>
             

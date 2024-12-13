@@ -87,3 +87,20 @@ export const useGetCharacterById=(id)=>{
 
     return {character,isLoading,isError}
 }
+
+export const useGetMultipleCharacters=(characterIndexes)=>{
+
+    const getMultipleCharactersRequest=async()=>{
+
+        const response = await fetch(`${baseUrl}/character/${[characterIndexes]}`, { method:"GET" });
+
+        if(!response.ok){
+            throw new Error("failed to get characters")
+        }
+        return response.json();
+    }
+
+    const {data:characters,isLoading,isError}=useQuery(["characters",characterIndexes],getMultipleCharactersRequest,);
+
+    return{characters,isLoading,isError}
+}

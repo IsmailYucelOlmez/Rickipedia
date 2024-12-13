@@ -82,7 +82,7 @@ const CharacterDetailsPage = () => {
           </div>
           
 
-          <div className='flex flex-col  w-full'>
+          <div className='flex flex-col w-full'>
           {episodesLoading ? (
            
             <Loading/>

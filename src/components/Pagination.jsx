@@ -4,12 +4,13 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import useFilterStore from '../store/FilterStore';
 
 
-const Pagination = ({dataLength,currentPage,pageSize}) => {
+const Pagination = ({dataLength}) => {
 
-    //const perPage=20;
     const [paginationPages,setPaginationPages]=useState([]);
 
-    const updatePage=useFilterStore((state)=>state.updatePage)
+    const currentPage=useFilterStore((state)=>state.filters.page)
+    const pageSize=useFilterStore((state)=>state.filters.pageSize)
+    const {updateFilters}=useFilterStore();
 
     let pages= [];
 
@@ -51,7 +52,7 @@ const Pagination = ({dataLength,currentPage,pageSize}) => {
 
     const selectPage=(page)=>{
 
-        updatePage(page)
+        updateFilters({page:page})
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }

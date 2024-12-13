@@ -15,19 +15,18 @@ const SearchandFilterBar = ({placeholder}) => {
     
   const location=useLocation();
 
-  const {resetPageValue,changeName,setPageSize,updateStatus,updateSpecies,updateGender}=useFilterStore()
-
+  const {updateFilters}=useFilterStore()
   
   const resetName=()=>{
 
     setName("");
-    changeName("")
+    updateFilters({name:""})
   }
 
   const handleNameInput=(e)=>{
 
     if(e.key=="Enter" && name){
-      changeName(name);
+      updateFilters({name:name})
       e.target.blur()
     }
   }
@@ -35,34 +34,33 @@ const SearchandFilterBar = ({placeholder}) => {
   const changeLength=(selectedItem)=>{
 
     setPageLength(selectedItem)  
-    setPageSize(selectedItem.value)
+    updateFilters({pageSize:selectedItem.value})
 
-    resetPageValue();
+    updateFilters({page:1})
   }
 
   const changeStatus= (selectedItem)=>{
 
     setStatus(selectedItem)
-    updateStatus(selectedItem.value)
+    updateFilters({status:[selectedItem.value]})
 
-    resetPageValue();
-    
+    updateFilters({page:1});
   }
 
   const changeSpecies=(selectedItem)=>{
    
     setSpecies(selectedItem)
-    updateSpecies(selectedItem.value)
+    updateFilters({species:[selectedItem.value]})
 
-    resetPageValue();
+    updateFilters({page:1})
   }
 
   const changeGenders=(selectedItem)=>{
     
     setGender(selectedItem)
-    updateGender(selectedItem.value)
+    updateFilters({gender:[selectedItem.value]})
 
-    resetPageValue();
+    updateFilters({page:1})
   }
 
 
@@ -71,7 +69,7 @@ const SearchandFilterBar = ({placeholder}) => {
       <div className='flex justify-center items-center w-1/4 gap-2'>
         <div className='flex justify-center items-center gap-1 w-full '>
           <input value={name} onKeyDown={(e)=>handleNameInput(e)} onChange={(e)=>setName(e.target.value)} type="text" name="" id="searchInput" className='w-full outline-none border border-black rounded-xl px-2 py-1 ' placeholder={placeholder} />
-          <button onClick={()=>changeName(name)} className='flex justify-center items-center'><SearchIcon sx={{ fontSize:{ xs:15, sm:20, md:25} }}/></button>
+          <button onClick={()=>updateFilters({name:name})} className='flex justify-center items-center'><SearchIcon sx={{ fontSize:{ xs:15, sm:20, md:25} }}/></button>
         </div>
         <button onClick={()=>resetName()} className=''>Clear</button>
       </div>
