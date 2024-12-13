@@ -5,32 +5,23 @@ import SearchandFilterBar from '../SearchandFilterBar';
 import CharacterTableRow from './CharacterTableRow';
 import Loading from '../Loading'
 import CharacterTableHead from './CharacterTableHead';
+import useFilterStore from '../../store/FilterStore';
 
 const CharacterDataTable = () => {
 
-  const filterTemplate=
-  {
-      page:1,
-      status:[],
-      species:[],
-      gender:[],
-      name:'',
-      pageSize:20,
-      sort:{attribute:'',type:'default'}
-  };
+  const filters=useFilterStore((state)=>state.filters)
 
-  const [filters,setFilters]=useState(filterTemplate)
+  console.log(filters)
 
   const {characters,isLoading:charactersLoading}=useGetCharacters(filters);
-  
 
   return (
       
         <div className='flex flex-col'>
 
-          <SearchandFilterBar placeholder={"Search by Name..."} setFilters={setFilters}/>
+          <SearchandFilterBar placeholder={"Search by Name..."} />
 
-          <CharacterTableHead filters={filters} setFilters={setFilters} />
+          <CharacterTableHead />
 
           {!charactersLoading ?(
           <>
@@ -42,7 +33,7 @@ const CharacterDataTable = () => {
             ))}
             </div>
 
-            <Pagination dataLength={characters?.info.count} currentPage={filters.page} pageSize={filters.pageSize} setFilters={setFilters} /> 
+            <Pagination dataLength={characters?.info.count} currentPage={filters.page} pageSize={filters.pageSize} /> 
 
           </>
 

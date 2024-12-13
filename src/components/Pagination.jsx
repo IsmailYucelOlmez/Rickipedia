@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import useFilterStore from '../store/FilterStore';
 
 
-const Pagination = ({dataLength,currentPage,pageSize,setFilters}) => {
+const Pagination = ({dataLength,currentPage,pageSize}) => {
 
     //const perPage=20;
     const [paginationPages,setPaginationPages]=useState([]);
+
+    const updatePage=useFilterStore((state)=>state.updatePage)
 
     let pages= [];
 
@@ -48,8 +51,7 @@ const Pagination = ({dataLength,currentPage,pageSize,setFilters}) => {
 
     const selectPage=(page)=>{
 
-        //setCurrentPage(page);
-        setFilters(prev=>({...prev,page:page}))
+        updatePage(page)
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }

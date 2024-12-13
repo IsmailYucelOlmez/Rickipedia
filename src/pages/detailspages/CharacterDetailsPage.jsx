@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useGetCharacterById } from '../../api/CharacterApi';
 import Image from '../../components/Image';
@@ -18,9 +18,11 @@ const CharacterDetailsPage = () => {
 
   const {character,isLoading}=useGetCharacterById(id);
 
-  const episodeIndexes=character?.episode.map((e,i)=>e.split("/").at(-1))
+  const episodeIndexes=character?.episode.map((e,i)=>e.split("/").at(-1)) || []
 
   const {episodes,isLoading:episodesLoading}=useGetMultipleEpisodes(episodeIndexes);
+  let convertedEpisodes= !Array.isArray(episodes) ? [episodes]:episodes
+  
 
   return (
     <div className='w-3/4 mx-auto my-12 flex flex-col items-center gap-10'>
@@ -85,7 +87,8 @@ const CharacterDetailsPage = () => {
            
             <Loading/>
           ):(
-            episodes?.map((e)=>(                        
+            
+            convertedEpisodes?.map((e)=>(                        
            
               <EpisodeTableRow key={e.id} episode={e}/>           
             ))

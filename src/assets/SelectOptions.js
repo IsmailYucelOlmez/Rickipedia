@@ -31,6 +31,10 @@ export const speciesOptions=
         {
             label:'Human',
             value:'human'
+        },
+        {
+            label:'Robot',
+            value:'robot'
         }
     ]
 
