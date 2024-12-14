@@ -6,13 +6,14 @@ import LocationTableRow from './LocationTableRow';
 import useFilterStore from '../../store/FilterStore';
 import LocationTableHead from './LocationTableHead';
 import Loading from '../Loading';
+import NotFoundComponent from '../NotFoundComponent';
 
 
 const LocationDataTable = () => {
 
   const filters=useFilterStore((state)=>state.filters)
 
-  const {locations,isLoading:locationsLoading}=useGetLocations(filters);
+  const {locations,isLoading:locationsLoading,error}=useGetLocations(filters);
  
 
   return (         
@@ -38,6 +39,11 @@ const LocationDataTable = () => {
         ):(
           <Loading/>
         )}
+
+        { (error && error?.message=="not found error") && (
+
+          <NotFoundComponent/>
+        )} 
 
       </div>           
       

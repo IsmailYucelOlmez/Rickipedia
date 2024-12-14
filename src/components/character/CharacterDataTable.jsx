@@ -6,12 +6,13 @@ import CharacterTableRow from './CharacterTableRow';
 import Loading from '../Loading'
 import CharacterTableHead from './CharacterTableHead';
 import useFilterStore from '../../store/FilterStore';
+import NotFoundComponent from '../NotFoundComponent';
 
 const CharacterDataTable = () => {
 
   const filters=useFilterStore((state)=>state.filters)
 
-  const {characters,isLoading:charactersLoading}=useGetCharacters(filters);
+  const {characters,isLoading:charactersLoading,error}=useGetCharacters(filters);
 
   return (
       
@@ -39,8 +40,11 @@ const CharacterDataTable = () => {
             <Loading/>
           )}
 
-          
+          { (error && error?.message=="not found error") && (
 
+            <NotFoundComponent/>
+          )} 
+     
         </div>
         
       

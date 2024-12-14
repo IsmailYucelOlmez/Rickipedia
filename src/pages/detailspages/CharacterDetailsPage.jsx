@@ -16,7 +16,7 @@ const CharacterDetailsPage = () => {
 
   const {id}=useParams();
 
-  const {character,isLoading}=useGetCharacterById(id);
+  const {character,isLoading,error}=useGetCharacterById(id);
 
   const locationIndex=character?.location?.url.split("/").at(-1) || 0
   const originIndex=character?.origin?.url.split("/").at(-1) || 0
@@ -101,6 +101,11 @@ const CharacterDetailsPage = () => {
         </div>
       </>
       )}
+
+      { error && (
+
+        <NotFoundComponent/>
+      )} 
       
     </div>
   )

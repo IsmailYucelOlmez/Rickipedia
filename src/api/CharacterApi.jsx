@@ -1,6 +1,8 @@
 import { useQuery } from "react-query"
+import { toast } from "react-toastify";
 
 const baseUrl="https://rickandmortyapi.com/api"
+
 
 const setParams=(filters,params)=>{
 
@@ -34,7 +36,9 @@ export const useGetCharacters=(filters)=>{
         const response = await fetch(`${baseUrl}/character/?${params.toString()}`, { method:"GET" });
 
         if(!response.ok){
-            throw new Error("failed to get characters")
+
+            if(response.status==404) throw new Error("not found error");
+            else throw new Error("failed to get characters")
         }
 
         const data = await response.json();
@@ -63,10 +67,11 @@ export const useGetCharacters=(filters)=>{
     
     }
 
-    const {data:characters,isLoading,isError}=useQuery(["data",filters],getCharactersRequest,);
-    
+    const {data:characters,isLoading,error}=useQuery(["data",filters],getCharactersRequest,);
+      
+    if(error && error?.message!="not found error") toast.error("Failed to Get Characters. Please Retry")
 
-    return{characters,isLoading,isError}
+    return{characters,isLoading,error}
 }
 
 export const useGetCharacterById=(id)=>{
@@ -83,9 +88,11 @@ export const useGetCharacterById=(id)=>{
         return response.json();
     }
 
-    const {data:character,isLoading,isError}=useQuery("getCharacter",getCharacterByIdRequest);
+    const {data:character,isLoading,error}=useQuery("getCharacter",getCharacterByIdRequest);
 
-    return {character,isLoading,isError}
+    if(error) toast.error("Failed to Get Character. Please Retry")
+
+    return {character,isLoading,error}
 }
 
 export const useGetMultipleCharacters=(characterIndexes)=>{
@@ -100,7 +107,9 @@ export const useGetMultipleCharacters=(characterIndexes)=>{
         return response.json();
     }
 
-    const {data:characters,isLoading,isError}=useQuery(["characters",characterIndexes],getMultipleCharactersRequest,);
+    const {data:characters,isLoading,error}=useQuery(["characters",characterIndexes],getMultipleCharactersRequest,);
 
-    return{characters,isLoading,isError}
+    if(error) toast.error("Failed to Get Characters. Please Retry")
+
+    return{characters,isLoading,error}
 }

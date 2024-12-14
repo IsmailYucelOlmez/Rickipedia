@@ -6,13 +6,14 @@ import EpisodeTableRow from './EpisodeTableRow';
 import EpisodeTableHead from './EpisodeTableHead';
 import useFilterStore from '../../store/FilterStore';
 import Loading from '../Loading';
+import NotFoundComponent from '../NotFoundComponent';
 
 
 const EpisodeDataTable = () => {
 
   const filters=useFilterStore((state)=>state.filters)
 
-  const {episodes,isLoading:episodesLoading}=useGetEpisodes(filters);
+  const {episodes,isLoading:episodesLoading,error}=useGetEpisodes(filters);
  
 
   return (
@@ -41,6 +42,11 @@ const EpisodeDataTable = () => {
         ):(
           <Loading/>
         )}  
+
+        { (error && error?.message=="not found error") && (
+
+          <NotFoundComponent/>
+        )} 
 
         </div>
         

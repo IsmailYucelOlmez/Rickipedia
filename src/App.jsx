@@ -10,6 +10,8 @@ import LocationDetailsPage from './pages/detailspages/LocationDetailsPage'
 import EpisodeDetailsPage from './pages/detailspages/EpisodeDetailsPage'
 import useSettingsStore from './store/settingsStore'
 import { useEffect } from 'react'
+import { ToastContainer  } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   
@@ -38,6 +40,8 @@ function App() {
           <Route path='/location/:id' element={<LocationDetailsPage/>} />
           <Route path='/episode/:id' element={<EpisodeDetailsPage/>} />
         </Routes>
+
+        <ToastContainer theme={`${theme=="light" ? 'light':'dark' }`} />
       </div>
     </div>
   )

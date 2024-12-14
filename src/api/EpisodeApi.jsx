@@ -1,4 +1,5 @@
 import { useQuery } from "react-query"
+import { toast } from "react-toastify";
 
 const baseUrl="https://rickandmortyapi.com/api"
 
@@ -31,7 +32,8 @@ export const useGetEpisodes=(filters)=>{
         const response = await fetch(`${baseUrl}/episode/?${params.toString()}`, { method:"GET" });
 
         if(!response.ok){
-            throw new Error("failed to get episodes")
+            if(response.status==404) throw new Error("not found error");
+            else throw new Error("failed to get episodes")
         }
 
         const data = await response.json();
@@ -60,10 +62,12 @@ export const useGetEpisodes=(filters)=>{
     
     }
 
-    const {data:episodes,isLoading,isError}=useQuery(["data",filters],getEpisodesRequest,);
+    const {data:episodes,isLoading,error}=useQuery(["data",filters],getEpisodesRequest,);
+
+    if(error && error?.message!="not found error") toast.error("Failed to Get Episodes. Please Retry")
     
 
-    return{episodes,isLoading,isError}
+    return{episodes,isLoading,error}
 }
 
 export const useGetEpisodeById=(id)=>{
@@ -80,9 +84,11 @@ export const useGetEpisodeById=(id)=>{
     
     }
 
-    const {data:episode,isLoading,isError}=useQuery(["episode",id],getEpisodeRequest,);
+    const {data:episode,isLoading,error}=useQuery(["episode",id],getEpisodeRequest,);
 
-    return{episode,isLoading,isError}
+    if(error) toast.error("Failed to Get Episode. Please Retry")
+
+    return{episode,isLoading,error}
 }
 
 
@@ -100,7 +106,9 @@ export const useGetMultipleEpisodes=(episodeIndexes)=>{
     
     }
 
-    const {data:episodes,isLoading,isError}=useQuery(["episodes",episodeIndexes],getMultipleEpisodesRequest,);
+    const {data:episodes,isLoading,error}=useQuery(["episodes",episodeIndexes],getMultipleEpisodesRequest,);
 
-    return{episodes,isLoading,isError}
+    if(error) toast.error("Failed to Get Episodes. Please Retry")
+
+    return{episodes,isLoading,error}
 }

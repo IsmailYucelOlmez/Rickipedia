@@ -31,6 +31,11 @@ const SearchandFilterBar = ({placeholder}) => {
     }
   }
 
+  const changeName=()=>{
+
+    if(name) updateFilters({name:name})
+  }
+
   const changeLength=(selectedItem)=>{
 
     setPageLength(selectedItem)  
@@ -82,7 +87,7 @@ const SearchandFilterBar = ({placeholder}) => {
       <div className='flex justify-center items-center w-1/4 gap-2'>
         <div className='flex justify-center items-center gap-1 w-full '>
           <input value={name} onKeyDown={(e)=>handleNameInput(e)} onChange={(e)=>setName(e.target.value)} type="text" name="" id="searchInput" className='w-full outline-none border border-black rounded-xl px-2 py-1 dark:bg-[#293241] dark:border-white' placeholder={placeholder} />
-          <button onClick={()=>updateFilters({name:name})} className='flex justify-center items-center'><SearchIcon sx={{ fontSize:{ xs:15, sm:20, md:25} }}/></button>
+          <button onClick={()=>changeName()} className='flex justify-center items-center'><SearchIcon sx={{ fontSize:{ xs:15, sm:20, md:25} }}/></button>
         </div>
         <button onClick={()=>resetName()} className=''>Clear</button>
       </div>

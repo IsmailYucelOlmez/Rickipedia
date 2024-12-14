@@ -1,4 +1,5 @@
 import { useQuery } from "react-query"
+import { toast } from "react-toastify";
 
 const baseUrl="https://rickandmortyapi.com/api"
 
@@ -31,7 +32,8 @@ export const useGetLocations=(filters)=>{
         const response = await fetch(`${baseUrl}/location/?${params.toString()}`, { method:"GET" });
 
         if(!response.ok){
-            throw new Error("failed to get locations")
+            if(response.status==404) throw new Error("not found error");
+            else throw new Error("failed to get episodes")
         }
 
         const data = await response.json();
@@ -60,10 +62,12 @@ export const useGetLocations=(filters)=>{
     
     }
 
-    const {data:locations,isLoading,isError}=useQuery(["data",filters],getLocationsRequest,);
+    const {data:locations,isLoading,error}=useQuery(["data",filters],getLocationsRequest,);
+
+    if(error && error?.message!="not found error") toast.error("Failed to Get Locations. Please Retry")
     
 
-    return{locations,isLoading,isError}
+    return{locations,isLoading,error}
 }
 
 export const useGetLocationById=(id)=>{
@@ -80,24 +84,11 @@ export const useGetLocationById=(id)=>{
         return response.json();
     }
 
-    const {data:location,isLoading,isError}=useQuery("getlocation",getLocationByIdRequest);
+    const {data:location,isLoading,error}=useQuery("getlocation",getLocationByIdRequest);
 
-    return {location,isLoading,isError}
+    if(error) toast.error("Failed to Get Locations. Please Retry")
+
+    return {location,isLoading,error}
 }
 
-export const useGetMultipleLocations=(locationIndexes)=>{
 
-    const getMultipleLocationsRequest=async()=>{
-
-        const response = await fetch(`${baseUrl}/location/${[locationIndexes]}`, { method:"GET" });
-
-        if(!response.ok){
-            throw new Error("failed to get locations")
-        }
-        return response.json();
-    }
-
-    const {data:locations,isLoading,isError}=useQuery(["locations",locationIndexes],getMultipleLocationsRequest,);
-
-    return{locations,isLoading,isError}
-}

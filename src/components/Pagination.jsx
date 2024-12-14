@@ -59,6 +59,7 @@ const Pagination = ({dataLength}) => {
     
 
   return (
+    dataLength > 0 && (
     <div className='flex flex-wrap items-center gap-3 mb-5 pt-5 px-5 border-t border-black dark:border-white'>
 
         {currentPage!=1 && (
@@ -80,6 +81,7 @@ const Pagination = ({dataLength}) => {
         )}
         
     </div>
+    )
   )
 }
 

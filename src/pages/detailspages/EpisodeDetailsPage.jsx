@@ -12,7 +12,7 @@ const EpisodeDetailsPage = () => {
 
   const {id}=useParams();
 
-  const {episode,isLoading}=useGetEpisodeById(id);
+  const {episode,isLoading,error}=useGetEpisodeById(id);
 
   const characterIndexes=episode?.characters.map((e,i)=>e.split("/").at(-1)) || []
   
@@ -67,6 +67,12 @@ const EpisodeDetailsPage = () => {
       ):(
         <Loading/>
       )}
+
+      { error && (
+
+        <NotFoundComponent/>
+      )} 
+
     </div>
   )
 }

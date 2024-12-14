@@ -8,7 +8,8 @@ const settingsStore=(set,get)=>({
         set((state) => ({ theme:themeOption }));
         
     },
-    baseUrl:'',
+    
+    
 })
 
 const useSettingsStore=create(settingsStore);

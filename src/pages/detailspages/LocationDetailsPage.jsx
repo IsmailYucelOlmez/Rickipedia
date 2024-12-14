@@ -12,7 +12,7 @@ const LocationDetailsPage = () => {
 
   const {id}=useParams();
 
-  const {location,isLoading}=useGetLocationById(id);
+  const {location,isLoading,error}=useGetLocationById(id);
 
   const characterIndexes=location?.residents.map((e,i)=>e.split("/").at(-1)) || []
   
@@ -65,6 +65,12 @@ const LocationDetailsPage = () => {
       ):(
         <Loading/>
       )}
+
+      { error && (
+
+        <NotFoundComponent/>
+      )} 
+
     </div>
   )
 }
