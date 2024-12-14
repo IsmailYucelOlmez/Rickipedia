@@ -12,6 +12,7 @@ import useSettingsStore from './store/settingsStore'
 import { useEffect } from 'react'
 import { ToastContainer  } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import Sidebar from './components/Sidebar'
 
 function App() {
   
@@ -28,7 +29,10 @@ function App() {
 
   return (
     <div className={`font-quicksand ${theme=="dark" ? 'dark':''} dark:bg-[#293241] dark:text-white`}>
-      <div className={` dark:bg-[#000] dark:text-white min-h-screen`}>
+      <div className={` dark:bg-[#293241] dark:text-white min-h-screen`}>
+
+        <Sidebar/>
+
         <Header/>
 
         <Routes>

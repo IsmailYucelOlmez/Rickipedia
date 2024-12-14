@@ -8,7 +8,11 @@ const settingsStore=(set,get)=>({
         set((state) => ({ theme:themeOption }));
         
     },
-    
+    sidebar:false,
+    setSidebar:(sidebarValue)=>{
+
+        set((state)=>({sidebar:sidebarValue}))
+    }
     
 })
 

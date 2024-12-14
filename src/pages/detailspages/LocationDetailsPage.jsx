@@ -20,7 +20,7 @@ const LocationDetailsPage = () => {
   let convertedCharacters= !Array.isArray(characters) ? [characters]:characters
 
   return (
-    <div className='w-3/4 mx-auto py-12'>
+    <div className='xs:w-9/10 lg:w-3/4 mx-auto py-12'>
       {!isLoading ? (
         <div className='flex flex-col gap-10'>
 

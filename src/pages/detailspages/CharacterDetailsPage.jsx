@@ -28,7 +28,7 @@ const CharacterDetailsPage = () => {
   
 
   return (
-    <div className='w-3/4 mx-auto py-12 flex flex-col items-center gap-10'>
+    <div className='xs:w-9/10 lg:w-3/4 mx-auto py-12 flex flex-col items-center gap-10'>
 
       {isLoading ? (
 

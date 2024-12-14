@@ -3,7 +3,7 @@ import LocationDataTable from '../components/location/LocationDataTable'
 
 const LocationsPage = () => {
   return (
-    <div className='w-3/4 mx-auto py-12'>
+    <div className='xs:w-9/10 lg:w-3/4 mx-auto py-12'>
       <LocationDataTable/>
     </div>
   )
