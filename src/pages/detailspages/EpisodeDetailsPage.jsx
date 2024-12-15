@@ -22,30 +22,30 @@ const EpisodeDetailsPage = () => {
   console.log(convertedCharacters)
 
   return (
-    <div className='xs:w-9/10 lg:w-3/4 mx-auto py-12'>
+    <div className='xs:w-9/10 lg:w-3/4 mx-auto xs:py-6 md:py-12'>
       {!isLoading ? (
-        <div className='flex flex-col gap-10'>
+        <div className='flex flex-col xs:gap-8 md:gap-10'>
 
           <div className='flex flex-col items-center gap-4'>
-            <h5 className='text-2xl font-semibold'>{episode?.name}</h5>  
+            <h5 className='xs:text-xl md:text-2xl font-semibold'>{episode?.name}</h5>  
 
             <div className='flex justify-center items-center gap-8'>
               <div className='flex items-center gap-1'>
                 <BookmarkBorderOutlinedIcon sx={{ fontSize:{ xs:15, sm:20, md:20} }}/>
-                <p>{episode?.episode}</p>
+                <p className='xs:text-sm md:text-base'>{episode?.episode}</p>
               </div>     
               <div className='flex items-center gap-1'>
-                <CalendarTodayIcon sx={{ fontSize:{ xs:15, sm:15, md:15} }}/>
-                <p>{episode?.air_date}</p>
+                <CalendarTodayIcon sx={{ fontSize:{ xs:12, sm:15, md:15} }}/>
+                <p className='xs:text-sm md:text-base'>{episode?.air_date}</p>
               </div> 
             </div>  
                                    
           </div>
 
-          <div className='flex flex-col items-center gap-6'>
+          <div className='flex flex-col items-center xs:gap-4 md:gap-6'>
             <div className='flex items-center gap-2'>
-              <h5 className='text-xl font-semibold'>Characters</h5>
-              <p>({characterIndexes.length})</p>
+              <h5 className='xs:text-lg md:text-xl font-semibold'>Characters</h5>
+              <p className='xs:text-sm md:text-base'>({characterIndexes.length})</p>
             </div>
 
             <div className='flex flex-col w-full gap-4'>
@@ -59,7 +59,7 @@ const EpisodeDetailsPage = () => {
               ))
             )}
           
-          </div>
+            </div>
             
           </div>
 

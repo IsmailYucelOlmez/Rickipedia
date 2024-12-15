@@ -11,15 +11,15 @@ const CharacterTableRow = ({character}) => {
 
   return (
     <div className='flex justify-between items-center my-2'>
-      <Image src={character.image} className={"w-28 h-28 rounded-xl"} />
+      <Image src={character.image} className={"xs:w-14 md:w-28 xs:h-14 md:h-28 rounded-xl"} />
       <div className='flex flex-col justify-between gap-4 flex-1 '>
-        <div className='grid grid-cols-4 gap-2 w-full text-center h-24'>
+        <div className='grid grid-cols-4 gap-2 w-full text-center xs:h-12 md:h-24 xs:text-xs md:text-base'>
           <p>{character.name}</p>
           <p>{character.status}</p>
           <p>{character.species}</p>
           <p>{character.gender}</p>
         
-          <Link to={originIndex!=0 ? `/location/${originIndex}` : ''}  className=" flex justify-center items-center gap-1 px-1 text-sm" >
+          <Link to={originIndex!=0 ? `/location/${originIndex}` : ''}  className="xs:hidden md:flex justify-center items-center gap-1 px-1 text-sm" >
             
             Origin: '
             {character?.origin?.name}'
@@ -28,7 +28,7 @@ const CharacterTableRow = ({character}) => {
             )}
           </Link>
           <div className="grid grid-cols-subgrid gap-4 col-span-3">
-          <Link to={locationIndex!=0 ? `/location/${locationIndex}` : ''} className="col-start-2  flex justify-center items-center gap-1 px-1 text-sm" >
+          <Link to={locationIndex!=0 ? `/location/${locationIndex}` : ''} className="xs:hidden md:flex col-start-2  flex justify-center items-center gap-1 px-1 text-sm" >
             
             Location: ' 
             { character?.location?.name}'

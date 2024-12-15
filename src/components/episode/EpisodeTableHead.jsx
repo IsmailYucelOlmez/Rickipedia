@@ -10,13 +10,13 @@ const EpisodeTableHead = () => {
   const filters=useFilterStore((state)=>state.filters)
 
   return (
-    <div className='flex justify-between items-center px-2 border-b border-black dark:border-white pb-1 mb-2'>
+    <div className='flex justify-between items-center px-2 border-b border-black dark:border-white pb-1 mb-2 xs:text-sm md:text-base'>
             
             <div className='grid grid-cols-3  gap-2 w-full text-center'>
               
               <button onClick={()=>setSort('episode')} className='flex justify-center items-center gap-1'>
                 {filters.sort.attribute!="episode" && (
-                    <CircleIcon sx={{ fontSize:{ xs:7, sm:7, md:7} }}/>
+                    <CircleIcon sx={{ fontSize:{ xs:5, sm:7, md:7} }}/>
                 )}
                 {filters.sort.attribute=="episode" && filters.sort.type=="asc" && (
                     <>
@@ -32,7 +32,7 @@ const EpisodeTableHead = () => {
               </button>
               <button onClick={()=>setSort('name')} className='flex justify-center items-center gap-1'>
                 {filters.sort.attribute!="name" && (
-                    <CircleIcon sx={{ fontSize:{ xs:7, sm:7, md:7} }}/>
+                    <CircleIcon sx={{ fontSize:{ xs:5, sm:7, md:7} }}/>
                 )}
                 {filters.sort.attribute=="name" && filters.sort.type=="asc" && (
                     <>

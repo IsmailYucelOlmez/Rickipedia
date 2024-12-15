@@ -4,7 +4,7 @@ import Image from '../components/Image'
 
 const HomePage = () => {
   return (
-    <div className='xs:w-9/10 lg:w-3/4 mx-auto flex xs:flex-col md:flex-row justify-between items-center gap-6 my-12'>
+    <div className='xs:w-9/10 lg:w-3/4 mx-auto flex xs:flex-col-reverse md:flex-row justify-between items-center gap-6 my-12'>
       <div className='flex flex-col gap-4 '>
         <h3 className='text-2xl font-semibold font-sourGummy'>Rickipedia</h3>
         <p className='text-lg font-semibold'>Your Ultimate Guide to the Multiverse!</p>

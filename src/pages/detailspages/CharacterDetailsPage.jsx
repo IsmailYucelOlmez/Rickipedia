@@ -28,36 +28,36 @@ const CharacterDetailsPage = () => {
   
 
   return (
-    <div className='xs:w-9/10 lg:w-3/4 mx-auto py-12 flex flex-col items-center gap-10'>
+    <div className='xs:w-9/10 lg:w-3/4 mx-auto py-12 flex flex-col items-center xs:gap-8 md:gap-10'>
 
       {isLoading ? (
 
         <Loading/>
       ):(
       <>
-        <div className='flex justify-center gap-10'>
-          <Image src={character?.image} className={"rounded-xl h-72"}/>
+        <div className='flex justify-center xs:gap-2 md:gap-10'>
+          <Image src={character?.image} className={"rounded-xl xs:h-36 md:h-72"}/>
 
-          <div className='flex flex-col gap-8'>
-            <h5 className='text-xl font-semibold'>{character?.name}</h5>
+          <div className='flex flex-col xs:gap-1 md:gap-8'>
+            <h5 className='xs:text-base md:text-xl font-semibold'>{character?.name}</h5>
 
-            <div className='flex flex-col gap-4'>
-              <div className='flex items-center gap-2'>
+            <div className='flex flex-col xs:gap-1 md:gap-4'>
+              <div className='flex items-center xs:gap-1 md:gap-2'>
                 <MonitorHeartIcon sx={{ fontSize:{ xs:15, sm:20, md:20} }}/>
-                <p>{character?.status}</p>
+                <p className='xs:text-sm md:text-base'>{character?.status}</p>
               </div>
               <div className='flex items-center gap-2'>
                 <AdbIcon sx={{ fontSize:{ xs:15, sm:20, md:20} }}/>
-                <p>{character?.species}</p>
+                <p className='xs:text-sm md:text-base'>{character?.species}</p>
               </div>
               <div className='flex items-center gap-2'>          
                 <TransgenderIcon sx={{ fontSize:{ xs:15, sm:20, md:20} }}/>              
-                <p>{character?.gender}</p>
+                <p className='xs:text-sm md:text-base'>{character?.gender}</p>
               </div>     
             </div>
 
-            <div className='flex flex-col gap-4'>
-              <Link to={originIndex!=0 ? `/location/${originIndex}` : ''}  className="flex items-center gap-2 px-1" >    
+            <div className='flex flex-col xs:gap-1 md:gap-4'>
+              <Link to={originIndex!=0 ? `/location/${originIndex}` : ''}  className="xs:text-sm md:text-base flex items-center xs:gap-1 md:gap-2 md:px-1" >    
                 <PublicIcon sx={{ fontSize:{ xs:15, sm:20, md:20} }}/>   
                 Origin: '
                 {character?.origin?.name}'
@@ -65,7 +65,7 @@ const CharacterDetailsPage = () => {
                   <OpenInNewOutlinedIcon sx={{ fontSize:{ xs:15, sm:15, md:15} }}/>
                 )}
               </Link>      
-              <Link to={locationIndex!=0 ? `/location/${locationIndex}` : ''} className=" flex items-center gap-2 px-1" >       
+              <Link to={locationIndex!=0 ? `/location/${locationIndex}` : ''} className="xs:text-sm md:text-base flex items-center xs:gap-1 md:gap-2 md:px-1" >       
                 <LocationOnIcon sx={{ fontSize:{ xs:15, sm:20, md:20} }}/>      
                 Location: ' 
                 { character?.location?.name}'
@@ -78,9 +78,9 @@ const CharacterDetailsPage = () => {
           </div>
         </div>
 
-        <div className='flex flex-col items-center gap-8 w-full'>
+        <div className='flex flex-col items-center xs:gap-1 md:gap-8 w-full'>
           <div className='flex items-center justify-center gap-2'>
-            <h5 className='text-xl font-semibold'>Episodes</h5>
+            <h5 className='xs:text-base md:text-xl font-semibold'>Episodes</h5>
             <p className='text-right'>({character?.episode?.length})</p>
           </div>
           

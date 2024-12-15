@@ -29,7 +29,7 @@ const Header = () => {
     <header className='xs:h-12 md:h-16 border-b border-black dark:border-white w-full flex xs:justify-between md:justify-around items-center xs:px-3 md:px-0'>
       <Link to={"/"} className='flex justify-center items-center gap-2'>
         <Image src={Logo} className={"xs:w-9 md:w-11 xs:h-9 md:h-11"} />
-        <h1 className='font-sourGummy text-xl'>Rickipedia</h1>
+        <h1 className='font-sourGummy xs:text-lg md:text-xl'>Rickipedia</h1>
       </Link>
 
       <nav className='xs:hidden md:flex justify-center items-center gap-4'>

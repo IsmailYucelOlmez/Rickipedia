@@ -11,14 +11,14 @@ const CharacterTableHead = () => {
 
   return (
     <div className='flex justify-between items-center px-2 border-b border-black dark:border-white pb-1 mb-2'>
-            <div className='w-28'>
+            <div className='xs:w-14 md:w-28'>
               <p></p>
             </div>
-            <div className='grid grid-cols-4  gap-2 w-full text-center'>
+            <div className='grid grid-cols-4  gap-2 w-full text-center xs:text-xs md:text-base'>
               
               <button onClick={()=>setSort('name')} className='flex justify-center items-center gap-1'>
                 {filters.sort.attribute!="name" && (
-                    <CircleIcon sx={{ fontSize:{ xs:7, sm:7, md:7} }}/>
+                    <CircleIcon sx={{ fontSize:{ xs:5, sm:7, md:7} }}/>
                 )}
                 {filters.sort.attribute=="name" && filters.sort.type=="asc" && (
                     <>
@@ -34,7 +34,7 @@ const CharacterTableHead = () => {
               </button>
               <button onClick={()=>setSort('status')} className='flex justify-center items-center gap-1'>
                 {filters.sort.attribute!="status" && (
-                    <CircleIcon sx={{ fontSize:{ xs:7, sm:7, md:7} }}/>
+                    <CircleIcon sx={{ fontSize:{ xs:5, sm:7, md:7} }}/>
                 )}
                 {filters.sort.attribute=="status" && filters.sort.type=="asc" && (
                     <>
@@ -49,7 +49,7 @@ const CharacterTableHead = () => {
               </button>
               <button onClick={()=>setSort('species')} className='flex justify-center items-center gap-1'>
                 {filters.sort.attribute!="species" &&  (
-                    <CircleIcon sx={{ fontSize:{ xs:7, sm:7, md:7} }}/>
+                    <CircleIcon sx={{ fontSize:{ xs:5, sm:7, md:7} }}/>
                 )}
                 {filters.sort.attribute=="species" && filters.sort.type=="asc" && (
                     <>
