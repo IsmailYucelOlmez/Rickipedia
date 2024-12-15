@@ -32,6 +32,18 @@ const filterStore=(set,get)=>({
             set((state)=>({filters:{...state.filters,sort:{attribute:attribute,type:"asc"}} } ))         
         }
     },
+    resetFilters:()=>{
+
+        set((state)=>({filters:{
+            page:1,
+            status:[],
+            species:[],
+            gender:[],
+            name:'',
+            pageSize:20,
+            sort:{attribute:'',type:'default'}
+        },}))
+    },
     
 
 })

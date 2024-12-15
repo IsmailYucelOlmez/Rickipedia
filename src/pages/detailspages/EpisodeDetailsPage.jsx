@@ -19,8 +19,6 @@ const EpisodeDetailsPage = () => {
   const {characters,isLoading:charactersLoading}=useGetMultipleCharacters(characterIndexes);
   let convertedCharacters= !Array.isArray(characters) ? [characters]:characters
 
-  console.log(convertedCharacters)
-
   return (
     <div className='xs:w-9/10 lg:w-3/4 mx-auto xs:py-6 md:py-12'>
       {!isLoading ? (

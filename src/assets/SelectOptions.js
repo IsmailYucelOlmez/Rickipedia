@@ -59,7 +59,7 @@ export const genderOptions=
         {
             label:'Unknown',
             value:'unknown'
-        }
+        },
     ]
 
 export const sizeOptions=

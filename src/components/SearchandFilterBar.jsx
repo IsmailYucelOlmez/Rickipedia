@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import {statuOptions,genderOptions,speciesOptions, sizeOptions} from '../assets/SelectOptions'
 import Select from 'react-select';
 import useFilterStore from '../store/FilterStore';
+import useSettingsStore from '../store/settingsStore';
 
 const SearchandFilterBar = ({placeholder}) => {
 
@@ -15,7 +16,8 @@ const SearchandFilterBar = ({placeholder}) => {
     
   const location=useLocation();
 
-  const {updateFilters}=useFilterStore()
+  const {filters,updateFilters}=useFilterStore()
+  const {theme}=useSettingsStore();
   
   const resetName=()=>{
 
@@ -68,6 +70,65 @@ const SearchandFilterBar = ({placeholder}) => {
     updateFilters({page:1})
   }
 
+  const changeFilters=()=>{
+    setName(""); 
+    updateFilters({name:""})
+
+    setPageLength({label:`${filters.pageSize} Row` ,value:filters.pageSize})
+    setStatus({label:`${filters.status.length>0 ? filters.status[0].charAt(0).toUpperCase() + filters.status[0].slice(1).toLowerCase() : 'All'}`,value:filters.status.length>0 ? filters.status: [] })
+    setSpecies({label:`${filters.species.length>0 ? filters.species[0].charAt(0).toUpperCase() + filters.species[0].slice(1).toLowerCase() : 'All'}`,value:filters.species.length>0 ? filters.species: []})
+    setGender({label:`${filters.gender.length>0 ? filters.gender[0].charAt(0).toUpperCase() + filters.gender[0].slice(1).toLowerCase() : 'All'}`,value:filters.gender.length>0 ? filters.gender: []})
+    
+    updateFilters({page:1})
+  }
+
+  useEffect(()=>{
+    
+    changeFilters();
+  },[])
+
+  
+
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: theme=="light" ? '#fff':"#293241", // Arka plan siyah
+      color: theme=="light" ? '#000':"white", // Metin beyaz
+      borderColor: theme=="light" ? '#000':"white", // Çerçeve beyaz
+      borderRadius:'15px',
+    }),
+    menu: (provided) => ({
+      ...provided,
+      backgroundColor: theme=="light" ? '#fff':"#293241", // Dropdown arka plan siyah
+      color: theme=="light" ? '#000':"white", // Dropdown metin beyaz
+      borderColor: theme=="light" ? '#000':"white",
+      borderRadius:'15px'
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: theme=="light" ? '#000':"white", // Seçili değer beyaz
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      color: "gray", // Placeholder gri
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? theme=="light" ? "#E5E5E5":"gray" : theme=="light" ? '#fff':"#293241", // Üzerine gelindiğinde daha açık siyah
+      color: theme=="light" ? '#000':"white", // Seçenek metni beyaz
+      borderRadius:'10px'
+    }),
+    menuList: (base) => ({
+      ...base,
+  
+      "::-webkit-scrollbar": {
+        width: "4px",
+        height: "0px",
+      },
+      borderRadius:'15px'
+    }),
+  };
+
 
   return (
     <div className='flex xs:flex-wrap md:flex-nowrap justify-between items-center mb-6 xs:gap-2 md:gap-4'>
@@ -86,7 +147,7 @@ const SearchandFilterBar = ({placeholder}) => {
             name="length"
             options={sizeOptions}
             className="p-0 text-xs text-black"
-            
+            styles={customStyles}
           />  
         {location.pathname=="/characters" && (
           <>
@@ -97,7 +158,8 @@ const SearchandFilterBar = ({placeholder}) => {
               name="status"
               options={statuOptions}
               className="p-0 text-xs text-black"
-              placeholder="Statu"                       
+              placeholder="Statu" 
+              styles={customStyles}                      
             />   
             <Select
               defaultValue={[]}       
@@ -107,6 +169,7 @@ const SearchandFilterBar = ({placeholder}) => {
               options={speciesOptions}
               className="p-0 text-xs text-black"
               placeholder="Species"
+              styles={customStyles}
             />  
             <Select
               defaultValue={[]}             
@@ -116,6 +179,7 @@ const SearchandFilterBar = ({placeholder}) => {
               options={genderOptions}
               className="p-0 text-xs text-black"
               placeholder="Gender"
+              styles={customStyles}
             />  
           </>
           
