@@ -6,6 +6,7 @@ import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
 import Loading from '../../components/Loading';
 import { useGetMultipleEpisodes } from '../../api/EpisodeApi';
 import EpisodeTableRow from '../../components/episode/EpisodeTableRow';
+import NotFoundComponent from '../../components/NotFoundComponent'
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import AdbIcon from '@mui/icons-material/Adb';
 import TransgenderIcon from '@mui/icons-material/Transgender';

@@ -6,6 +6,7 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import LensBlurOutlinedIcon from '@mui/icons-material/LensBlurOutlined';
 import { useGetMultipleCharacters } from '../../api/CharacterApi';
 import CharacterTableRow from '../../components/character/CharacterTableRow';
+import NotFoundComponent from '../../components/NotFoundComponent';
 
 
 const LocationDetailsPage = () => {
