@@ -17,7 +17,7 @@ const setParams=(filters,params)=>{
     } 
 
     params.set("page", filters.pageSize==10 ? actualPage:filters.page);
-    params.set("name", filters.name);
+    params.set("name", filters.name.toLocaleLowerCase('TR'));
     params.set("status", filters.status.join(",") );
     params.set("species", filters.species.join(","));
     params.set("gender", filters.gender.join(","));
